@@ -3,7 +3,7 @@ import { Contato } from './contato';
 
 
 
-@Entity()
+@Entity('clientes')
 export class Cliente {
     @PrimaryGeneratedColumn()
     id: number;
@@ -14,6 +14,9 @@ export class Cliente {
     @Column()
     email: string;
 
+    @Column()
+    password:string;
+    
     @Column()
     telefone: string;
 
