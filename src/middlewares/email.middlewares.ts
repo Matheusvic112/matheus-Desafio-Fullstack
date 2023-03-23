@@ -1,3 +1,4 @@
+import '../@types/express'
 
 import { NextFunction, Request , Response } from "express";
 import { AppError } from "../errors/appHandles";
@@ -15,7 +16,3 @@ export const verifyEmailMiddlewares = async(req:Request , resp:Response , next: 
     
     return next()
 }
-
-
-
-

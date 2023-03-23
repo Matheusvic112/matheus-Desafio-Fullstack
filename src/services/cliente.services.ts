@@ -1,6 +1,8 @@
 import { Request , Response } from "express";
 import { hash, compare } from 'bcrypt';
 import jwt from "jsonwebtoken";
+import '../@types/express'
+
 import {clienteRepo} from "../repositores/userRepo"
 import { AppError } from "../errors/appHandles";
 import "express-async-errors"
@@ -39,7 +41,7 @@ export const clienteGetIdService = async(id:string) =>{
     const getCliente = await clienteRepo.findOneBy({id:id})
     
     if (!getCliente) {
-        throw new AppError('Usuário não encontrado', 404)
+        throw new AppError("User not found", 404)
     }
     return getCliente
 }
@@ -48,7 +50,7 @@ export const updateClienteService = async(payload:IUserUpdate, id:string)=>{
     const users = await clienteRepo.findOneBy({id:id})
     
     if(!users?.id){
-        throw new AppError("Usuario nao encontrado " , 404)
+        throw new AppError("User not found" , 404)
     }
     await clienteRepo.update( users.id ,{...payload,password:undefined })
 
@@ -59,7 +61,7 @@ export const updateClienteService = async(payload:IUserUpdate, id:string)=>{
 export const deleteClienteService =  async(req:Request) =>{
     const user = await clienteRepo.findOneBy({id:req.params.id})
     if (!user) {
-        throw new AppError('Invalid Identification', 404);
+        throw new AppError("Invalid Identification", 404);
     }
 
     await clienteRepo.delete(user.id);
@@ -72,19 +74,19 @@ export const loginClienteService = async(login:IUserLogin) =>{
     console.log(loginCliente)
     if(!loginCliente){
         
-        throw new AppError('wrong email ',404)
+        throw new AppError("wrong email",404)
     }
     
     
         const decodPass = await compare(password,loginCliente.password)
         
         if(!decodPass){
-            throw new AppError('Wrong password',404)
+            throw new AppError("Wrong password",404)
         }
         
     
     
-        const token = jwt.sign({ }, process.env.SECRET_KEY as string,{expiresIn:"24h",subject:loginCliente.id})
+        const token = jwt.sign({id:loginCliente.id }, process.env.SECRET_KEY as string,{expiresIn:"24h",subject:loginCliente.id})
         
         return {token}
 }    

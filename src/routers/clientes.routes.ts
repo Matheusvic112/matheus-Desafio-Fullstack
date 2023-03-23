@@ -1,4 +1,5 @@
 import { Router } from "express";
+import '../@types/express'
 
 import {
   clienteGetController,
@@ -14,6 +15,6 @@ export const routerCliente = Router();
 
 routerCliente.post("", verifyEmailMiddlewares, createUserController);
 routerCliente.get("", verifyTokenMiddlewares, getClienteController);
-routerCliente.get("/:id", clienteGetController);
+routerCliente.get("/:id",verifyTokenMiddlewares, clienteGetController);
 routerCliente.patch("/:id", verifyTokenMiddlewares, updateClienteControler);
 routerCliente.delete("/:id", verifyTokenMiddlewares, deleteClienteControler);

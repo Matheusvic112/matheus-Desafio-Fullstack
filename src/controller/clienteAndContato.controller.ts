@@ -1,6 +1,8 @@
 import { clienteGetIdService, createCLiente, deleteClienteService, getClienteService, loginClienteService, updateClienteService } from "../services/cliente.services";
+import '../@types/express'
+
 import { Request , Response } from "express";
-import { createContatoService, getContatoService, updateContatoService } from "../services/contatos.services";
+import { contatoGetIdService, createContatoService, deleteContatoByIdService, getContatoService, updateContatoService } from "../services/contatos.services";
 
 export const createUserController = async(req :Request ,res:Response) => {
 
@@ -41,7 +43,7 @@ export const clienteGetController = async(req:Request , res:Response) =>{
 
 
 export const CreateContatoControler = async(req:Request, res:Response) =>{
-    const user = await createContatoService(req.body , req.params.id)
+    const user = await createContatoService(req)
     return res.status(200).json(user)
 }
 
@@ -55,4 +57,17 @@ export const updateContatoControler = async(req:Request, res:Response) =>{
 export const getContatoController = async(req :Request ,res:Response) =>{
     const user = await getContatoService()
     return res.status(200).json(user)
+}
+
+export const deleteContatoControler = async(req:Request, res:Response) =>{
+    const [statusCode, data] = await deleteContatoByIdService(req.params.id)
+    return res.status(statusCode).json(data)
+}
+
+
+export const contatoGetIdController = async(req:Request , res:Response) =>{
+    
+    const getContato=  await contatoGetIdService(req.params.id)
+    return res.status(200).json(getContato)
+    
 }
