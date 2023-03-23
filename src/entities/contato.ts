@@ -1,10 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Cliente } from '../entities/cliente';
 
 @Entity('contatos')
 export class Contato {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column()
     nome_completo: string;
@@ -15,9 +15,12 @@ export class Contato {
     @Column()
     telefone: string;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    data_registro: Date;
+    @CreateDateColumn()
+    createdAt:Date;
 
-    @ManyToOne(() => Cliente, cliente => cliente.contatos)
+    @UpdateDateColumn()
+    updatedAt:Date;
+
+    @ManyToOne(() => Cliente, (cliente) => cliente.contatos)
     cliente: Cliente;
 }
