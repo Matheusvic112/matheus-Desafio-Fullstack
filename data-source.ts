@@ -3,7 +3,7 @@ import { DataSource } from "typeorm"
 import "dotenv/config"
 import { Cliente } from "./src/entities/cliente"
 import { Contato } from "./src/entities/contato"
-import {initial1679494940173} from "./src/migrations/1679494940173-initial"
+import { initial1679529513302 } from "./src/migrations/1679529513302-initial"
 
 const AppDataSource = new DataSource(
     process.env.NODE_ENV === "test" ?
@@ -21,9 +21,9 @@ const AppDataSource = new DataSource(
         password: process.env.PGPASSWORD,
         database: process.env.PGDATABASE,
         logging: true,
-        synchronize: false,
+        synchronize: true,
         entities: [Cliente,Contato],
-        migrations: [initial1679494940173]
+        migrations: [initial1679529513302]
     }
 )
 
