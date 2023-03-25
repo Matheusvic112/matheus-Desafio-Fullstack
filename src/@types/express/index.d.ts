@@ -1,12 +1,11 @@
-import * as express from "express"
+import { Cliente } from "./../../entities/cliente";
+
 declare global {
     namespace Express {
-        interface Request{
-            clientFind:{
-                cliente:String
-            }
+        interface Request {
+            clientFound: Cliente;
         }
     }
 }
 
-export{}
+export {};

@@ -1,9 +1,15 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Contato } from './contato';
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    ManyToOne,
+    OneToMany,
+    CreateDateColumn,
+    UpdateDateColumn,
+} from "typeorm";
+import { Contato } from "./contato";
 
-
-
-@Entity('clientes')
+@Entity("clientes")
 export class Cliente {
     @PrimaryGeneratedColumn("uuid")
     id: string;
@@ -14,18 +20,18 @@ export class Cliente {
     @Column()
     email: string;
 
-    @Column({select:false})
-    password:string;
-    
+    @Column({ select: false })
+    password: string;
+
     @Column()
     telefone: string;
-   
-    @CreateDateColumn()
-    createdAt:Date;
-  
-    @UpdateDateColumn()
-    updatedAt:Date
 
-    @OneToMany(() => Contato, contato => contato.cliente)
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
+
+    @OneToMany(() => Contato, (contato) => contato.cliente)
     contatos: Contato[];
 }
