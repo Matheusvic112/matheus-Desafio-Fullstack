@@ -1,58 +1,81 @@
+import "express-async-errors";
+import { Request } from "express";
 import { AppError } from "../errors/appHandles";
-import "express-async-errors"
-import { IContactRequest, IContactUpdate } from "../interface";
-import { clienteRepo, contatoRepo } from "../repositores/userRepo";
+import { IContactUpdate, IUser } from "../interface";
+import { contatoRepo } from "../repositores/userRepo";
+import { Contato } from "../entities/contato";
 
-export const createContatoService= async(payload:IContactRequest, id:string) =>{
-    const emailExist = await contatoRepo.findOneBy({email:payload.email})
-    if(emailExist){
-        throw new AppError("Email exist " , 409)
-
+const findContactById = async (id: string): Promise<Contato | null> => {
+    const foundContact = await contatoRepo.findOne({
+        where: {
+            id,
+        },
+        relations: {
+            cliente: true,
+        },
+    });
+    if (!foundContact) {
+        throw new AppError("Contact Not Found", 404);
     }
-    const userFind = await clienteRepo.findOne({where:{id:id}})
+    return foundContact;
+};
 
-    if(!userFind){
-        throw new AppError("user not found " , 404)
-
+export const createContatoService = async (req: Request) => {
+    const emailExist = await contatoRepo.findOneBy({ email: req.body.email });
+    const userLogged = req.clientFound;
+    if (emailExist) {
+        throw new AppError("Email exist ", 409);
     }
-    const createCliente = contatoRepo.create({...payload , cliente:userFind })
-    await contatoRepo.save(createCliente)
+    const body: IUser = req.body;
+    const createCliente = contatoRepo.create({...body,
+        cliente: userLogged,
+    });
+    await contatoRepo.save(createCliente);
 
-    return createCliente
-}
-export const updateContatoService = async(payload: IContactUpdate, id: string ) => {
+    return await findContactById(createCliente.id);
+};
 
-    const contato = await contatoRepo.findOneBy({id:id})
+export const updateContatoService = async (payload: IContactUpdate,id: string) => {
+
+    const contato = await contatoRepo.findOneBy({ id: id });
 
     if (!contato) {
-        throw new AppError('contact not found', 404)
+        throw new AppError("contact not found", 404);
     }
 
-    const emailExist = await contatoRepo.findOneBy({email: payload.email, id: id})
 
-    if (emailExist) {
-        throw new AppError('Email already existing in another contact', 409)
-    }
+    await contatoRepo.update(id, { ...contato, ...payload });
 
-    
-    await contatoRepo.update(id,{...contato, ...payload})
+    return await findContactById(id);
+};
 
-    return payload
-}
-
-
-export const getContatoService = async()=>{
+export const getContatoService = async () => {
     const contato = await contatoRepo.find({
-        select:{id:true,
-            nome_completo:true,
-            email:true,
-            telefone:true
-            
+        select: { id: true, nome_completo: true, email: true, telefone: true },
+        relations: {
+            cliente: true,
         },
-        relations:{
-            cliente:true
-        }
+    });
+    return contato;
+};
 
-    })
-    return contato
-}
+export const contatoGetIdService = async (id: string) => {
+    const getContato = await contatoRepo.findOneBy({ id: id });
+
+    if (!getContato) {
+        throw new AppError("Contact not found", 404);
+    }
+
+    return getContato;
+};
+
+export const deleteContatoByIdService = async (id: string) => {
+    const contato = await contatoRepo.findOneBy({id:id })
+
+    if (!contato) {
+        throw new AppError("contact not found", 404)
+    }
+
+    await contatoRepo.delete(id)
+    return [204]
+}    

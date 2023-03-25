@@ -1,9 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Cliente } from '../entities/cliente';
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    ManyToOne,
+    CreateDateColumn,
+    UpdateDateColumn,
+    JoinColumn,
+} from "typeorm";
+import { Cliente } from "../entities/cliente";
 
-@Entity('contatos')
+@Entity("contatos")
 export class Contato {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn("uuid")
     id: string;
 
     @Column()
@@ -16,11 +24,12 @@ export class Contato {
     telefone: string;
 
     @CreateDateColumn()
-    createdAt:Date;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updatedAt:Date;
+    updatedAt: Date;
 
     @ManyToOne(() => Cliente, (cliente) => cliente.contatos)
+    @JoinColumn()
     cliente: Cliente;
 }
