@@ -11,7 +11,10 @@
         "drop": "psql -U mathe -d mathe -c \"DROP DATABASE db_api2\" \"exit\"",
         "new": "psql -U mathe -d mathe -c \"CREATE DATABASE db_api2\" \"exit\"",
         "migration:generate": "typeorm-ts-node-commonjs migration:generate src/migrations/initial -d ./src/data-source.ts",
-        "migration:run": "typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts"
+        "migration:run": "typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
+        "build":"tsc ",
+        "start":"node dist/server.js",
+        "migration:prod":"yarn typeorm migration:run -d dist/data-source"
     },
     "dependencies": {
         "@types/uuid": "^9.0.1",
