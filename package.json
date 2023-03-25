@@ -38,7 +38,9 @@
         "typeorm-cli": "^1.0.7",
         "typescript": "^5.0.2",
         "uuid": "^9.0.0",
-        "yup": "^1.0.2"
+        "yup": "^1.0.2",
+        "@types/cors": "^2.8.13"
+
     },
     "devDependencies": {
         "@types/bcrypt": "^5.0.0",
