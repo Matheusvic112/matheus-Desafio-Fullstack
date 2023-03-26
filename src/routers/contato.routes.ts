@@ -1,16 +1,14 @@
 import { Router } from "express";
-import {contatoGetIdController,CreateContatoControler,deleteContatoControler,getContatoController,
+import {contatoGetIdController,CreateContatoControler,deleteContatoControler,
  updateContatoControler,
 } from "../controller/clienteAndContato.controller";
 import { verifyEmailMiddlewares } from "../middlewares/email.middlewares";
 import { verifyTokenMiddlewares } from "../middlewares/token.middlewares";
-import { authContatoMiddleware, authDeleteMiddleware } from "../middlewares/decodeToken.middlewares";
-import { verifyTextMiddleware } from "../middlewares/textSerializer.middlewares";
-import { ClienteSerializer } from "../serializer/cliente.serializer";
+import { authContatoMiddleware, authDeleteMiddleware, decodeGetContatos } from "../middlewares/decodeToken.middlewares";
 
 export const routerContatos = Router();
 
-routerContatos.post("/",verifyTextMiddleware(ClienteSerializer) ,verifyTokenMiddlewares,authContatoMiddleware,verifyEmailMiddlewares,CreateContatoControler);
+routerContatos.post("/",verifyTokenMiddlewares,authContatoMiddleware,verifyEmailMiddlewares,CreateContatoControler);
 
 routerContatos.patch("/:id",verifyTokenMiddlewares,authDeleteMiddleware,updateContatoControler);
 
@@ -18,4 +16,4 @@ routerContatos.delete("/:id", verifyTokenMiddlewares,authDeleteMiddleware,delete
 
 routerContatos.get("/:id", verifyTokenMiddlewares, authContatoMiddleware,contatoGetIdController);
 
-routerContatos.get("", verifyTokenMiddlewares,getContatoController);
+routerContatos.get("", verifyTokenMiddlewares, decodeGetContatos);

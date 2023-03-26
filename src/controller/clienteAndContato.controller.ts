@@ -11,7 +11,6 @@ import {
     contatoGetIdService,
     createContatoService,
     deleteContatoByIdService,
-    getContatoService,
     updateContatoService,
 } from "../services/contatos.services";
 
@@ -54,10 +53,6 @@ export const updateContatoControler = async (req: Request, res: Response) => {
     return res.status(200).json(user);
 };
 
-export const getContatoController = async (req: Request, res: Response) => {
-    const user = await getContatoService();
-    return res.status(200).json(user);
-};
 
 export const deleteContatoControler = async (req: Request, res: Response) => {
     const [statusCode, data] = await deleteContatoByIdService(req.params.id);

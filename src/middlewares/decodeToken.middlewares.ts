@@ -78,7 +78,6 @@ return jwt.verify(token,process.env.SECRET_KEY as string,async (error, decoded: 
 };
 
 
-
 export const authDeleteMiddleware = async (req: Request,res: Response,next: NextFunction) => {
     const { headers } = req;
     
@@ -120,3 +119,32 @@ return jwt.verify(token,process.env.SECRET_KEY as string,async (error, decoded: 
 }
 );
 };
+
+export const decodeGetContatos = async (req: Request,res: Response) =>{
+
+    let token = req.headers.authorization as string;
+
+    token  = token?.split(" ")[1];
+
+    const clientToken = jwt.decode(token);
+
+    if (!clientToken) {
+        throw new AppError("Invalid Token");
+    }
+    const { sub: loginCliente } = clientToken;
+    const clientFound = await clienteRepo.findOne({
+        where: {
+            id: String(loginCliente),
+        },
+        relations: {
+            contatos: true,
+        },
+    });
+    if (!clientToken) {
+        throw new AppError("Invalid Token");
+    }
+    return res.json(clientFound);
+    
+}
+
+

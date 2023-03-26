@@ -49,15 +49,6 @@ export const updateContatoService = async (payload: IContactUpdate,id: string) =
     return await findContactById(id);
 };
 
-export const getContatoService = async () => {
-    const contato = await contatoRepo.find({
-        select: { id: true, nome_completo: true, email: true, telefone: true },
-        relations: {
-            cliente: true,
-        },
-    });
-    return contato;
-};
 
 export const contatoGetIdService = async (id: string) => {
     const getContato = await contatoRepo.findOneBy({ id: id });
