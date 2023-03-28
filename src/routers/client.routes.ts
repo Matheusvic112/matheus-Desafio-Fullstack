@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import {clienteGetController,createUserController,deleteClienteControler,getClienteController,updateClienteControler,
+import {clientGetController,createUserController,deleteClientControler,getClienteController,updateClienteControler,
 } from "../controller/clienteAndContato.controller";
 import { authClienteMiddleware } from "../middlewares/decodeToken.middlewares";
 import { verifyEmailMiddlewares } from "../middlewares/email.middlewares";
@@ -12,6 +12,6 @@ export const routerCliente = Router();
 
 routerCliente.post("",verifyTextMiddleware(ClienteSerializer) ,verifyEmailMiddlewares, createUserController);
 routerCliente.get("", verifyTokenMiddlewares, getClienteController);
-routerCliente.get("/:id", verifyTokenMiddlewares,authClienteMiddleware, clienteGetController);
+routerCliente.get("/:id", verifyTokenMiddlewares,authClienteMiddleware, clientGetController);
 routerCliente.patch("/:id", verifyTokenMiddlewares ,authClienteMiddleware,updateClienteControler);
-routerCliente.delete("/:id", verifyTokenMiddlewares,authClienteMiddleware,deleteClienteControler);
+routerCliente.delete("/:id", verifyTokenMiddlewares,authClienteMiddleware,deleteClientControler);
