@@ -38,7 +38,6 @@ export const createContatoService = async (req: Request) => {
 export const updateContatoService = async (payload: IContactUpdate,id: string) => {
 
     const contato = await contatoRepo.findOneBy({ id: id });
-
     if (!contato) {
         throw new AppError("contact not found", 404);
     }
