@@ -99,9 +99,7 @@ return jwt.verify(token,process.env.SECRET_KEY as string,async (error, decoded: 
     }
     const id = String(decoded.sub);
     const clientFound = await clienteRepo.findOneBy({ id });
-    const contatoFound = await contatoRepo.findOneBy({ cliente:{id} }) as Contato;
-    console.log(contatoFound.id)
-    console.log(req.params.id)
+   
     if (!clientFound) {
         throw new AppError("User Not Found", 404);
     }
