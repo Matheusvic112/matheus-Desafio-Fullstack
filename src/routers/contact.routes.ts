@@ -1,6 +1,5 @@
 import { Router } from "express";
-import {contatoGetIdController,CreateContatoControler,deleteContatoControler,
- updateContatoControler,
+import {contatoGetIdController, CreateContactControler, deleteContactControler,
 } from "../controller/clienteAndContato.controller";
 import { verifyEmailMiddlewares } from "../middlewares/email.middlewares";
 import { verifyTokenMiddlewares } from "../middlewares/token.middlewares";
@@ -8,11 +7,11 @@ import { authContatoMiddleware, authDeleteMiddleware, decodeGetContatos } from "
 
 export const routerContatos = Router();
 
-routerContatos.post("/",verifyTokenMiddlewares,authContatoMiddleware,verifyEmailMiddlewares,CreateContatoControler);
+routerContatos.post("/",verifyTokenMiddlewares,authContatoMiddleware,verifyEmailMiddlewares,CreateContactControler);
 
-routerContatos.patch("/:id",verifyTokenMiddlewares,authDeleteMiddleware,updateContatoControler);
+routerContatos.patch("/:id",verifyTokenMiddlewares,authDeleteMiddleware,CreateContactControler);
 
-routerContatos.delete("/:id", verifyTokenMiddlewares,authDeleteMiddleware,deleteContatoControler);
+routerContatos.delete("/:id", verifyTokenMiddlewares,authDeleteMiddleware,deleteContactControler);
 
 routerContatos.get("/:id", verifyTokenMiddlewares, authContatoMiddleware,contatoGetIdController);
 

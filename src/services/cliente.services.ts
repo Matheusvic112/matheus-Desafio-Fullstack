@@ -71,7 +71,7 @@ export const updateClienteService = async (
     return payload;
 };
 
-export const deleteClienteService = async (req: Request) => {
+export const deleteClientService = async (req: Request) => {
     const user = await clienteRepo.findOneBy({ id: req.params.id });
     if (!user) {
         throw new AppError("Invalid Identification", 404);
@@ -81,7 +81,7 @@ export const deleteClienteService = async (req: Request) => {
     return [204];
 };
 
-export const loginClienteService = async (login: IUserLogin) => {
+export const loginClientService = async (login: IUserLogin) => {
     const { password, email } = login;
     const loginCliente = await clienteRepo.findOne({
         where: { email },
