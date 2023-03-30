@@ -1,12 +1,12 @@
 <h2 align="center" style='font-family: sans-serif'>
-	CliCont API | API REST (Back-end)
+	WebAgenda API | API REST (Back-end)
 </h2>
 
 <p align = "center">
 Este é o backend da aplicação WebAgenda API para gerenciamento de clientes e contatos.
 </p>
 
-<li>A API está disponível em https://api-clie-cont.onrender.com</li>
+<li>A API  disponível em https://fullstack-api-ncj2.onrender.com</li>
 
 <h2 align ='center'>Clientes (Endpoints)</h2>
 
@@ -16,9 +16,9 @@ Este é o backend da aplicação WebAgenda API para gerenciamento de clientes e 
 
 <br/>
 
-Observação: O campo "phone" precisa ter 11 digitos
+Observação: O campo "telefone" precisa ter 11 digitos
 
-`POST /clients - FORMATO DA REQUISIÇÃO - STATUS 201`
+`POST /client - FORMATO DA REQUISIÇÃO - STATUS 201`
 
 ```json
 {
@@ -159,7 +159,7 @@ Caso dê tudo certo, a resposta será assim:
 
 <br/>
 
-`DELETE /client/:client_id - FORMATO DA RESPOSTA - STATUS 204`
+`DELETE /client/:id - FORMATO DA RESPOSTA - STATUS 204`
 
 ```json
 {}
@@ -183,7 +183,7 @@ Caso dê tudo certo, a resposta será assim:
 
 <br/>
 
-`POST /contacts - FORMATO DA REQUISIÇÃO`
+`POST /contact - FORMATO DA REQUISIÇÃO`
 
 ```json
 {
@@ -195,7 +195,7 @@ Caso dê tudo certo, a resposta será assim:
 
 Caso dê tudo certo, a resposta será assim:
 
-`POST /contacts - FORMATO DA RESPOSTA - STATUS 201`
+`POST /contact - FORMATO DA RESPOSTA - STATUS 201`
 
 ```json
 
@@ -223,7 +223,7 @@ Caso dê tudo certo, a resposta será assim:
 
 <br/>
 
-`GET /contacts/:id - FORMATO DA RESPOSTA - STATUS 200`
+`GET /contact/:id - FORMATO DA RESPOSTA - STATUS 200`
 
 ```json
 {
@@ -243,7 +243,7 @@ Caso dê tudo certo, a resposta será assim:
 
 <br/>
 
-`PATCH /contacts/:id - FORMATO DA REQUISIÇÃO`
+`PATCH /contact/:id - FORMATO DA REQUISIÇÃO`
 
 ```json
 {
@@ -281,7 +281,7 @@ Caso dê tudo certo, a resposta será assim:
 
 <br/>
 
-`DELETE /contacts/:contact_id - FORMATO DA RESPOSTA - STATUS 204`
+`DELETE /contact/:id - FORMATO DA RESPOSTA - STATUS 204`
 
 ```json
 {}
