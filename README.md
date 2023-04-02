@@ -33,6 +33,11 @@ $ yarn dev
 
 ```
 
+
+<h3>Agora você tem uma aplicação em pleno funcionamento e esperando para ser rodada. 🚀<h3>
+
+🔥 Server running 🔥
+
 </br>
 
 <p align = "center">
