@@ -2,6 +2,39 @@
 	WebAgenda API | API REST (Back-end)
 </h2>
 
+
+<h3>Iniciando o projeto</h3>
+
+
+<p align = "center">
+Para instalar as dependências, utilize o seguinte comando no prompt de comando:
+</p>
+
+```json
+$ yarn
+
+```
+
+<p align = "center">
+Passo 2 - Rodar uma migração :gear:
+</p>
+Após instalar as dependências, você pode rodar uma migração utilizando o seguinte comando no prompt de comando:
+
+```json
+$ yarn migration:run
+```
+
+<p align = "center">
+Passo 3 - Iniciar o servidor de desenvolvimento :rocket:
+</p>
+
+```json
+$ yarn dev
+
+```
+
+</br>
+
 <p align = "center">
 Este é o backend da aplicação WebAgenda API para gerenciamento de clientes e contatos.
 </p>
